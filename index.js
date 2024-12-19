@@ -27,6 +27,23 @@ app.get('/dogs', (req, res) => {
 // /dogs => 'woof'
 // / => home
 
+app.get('/r/:subreddit', (req, res) => {
+    const { subreddit } = req.params;
+    res.send(`<h1>Browsing the ${subreddit} subreddit`);
+})
+
+app.get("/r/:subreddit/:postId", (req, res) => {
+  const { subreddit, postId } = req.params;
+  res.send(`<h1>Browsing the post id ${postId} in the ${subreddit} subreddit!!!`);
+});
+
+app.get("/search", (req, res) => {
+    const { q, color } = req.query;
+    if (!q) {
+        res.send("Nothing found if nothing searched");
+    }
+    res.send(`<h1>Search results for ${q} with color ${color} is retrieved</h1>`);
+})
 
 app.get('*', (req, res) => {
     res.send(`I don't know that path!`);
